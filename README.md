@@ -91,26 +91,19 @@ The dependency manager is just a wrapper around `find_package` and `FetchContent
 Because the latter is provided after `CMake 3.11` the project requires that as a minimum 
 CMake version.
 
-## Installation & Usage
+## Installation
 
 Installation can be done any way you wish, the only requirement is that the repo's 
 `add_subdirectory`'d into the project.
 You can just copy the whole thing and add it to your repo if you wish, or use a Git submodule
 to get it.  
-If you ask me, I use it with `FetchContent`:  
+If you ask me, I use it with a submodule:  
+
+## Usage
 Have a `dependencies.cmake` file which is laid out like so, with example dependencies:
 
 ```cmake
 ## - Insert License notice -
-
-## Install GetDependency
-include(FetchContent)
-FetchContent_Declare(
-    GetDependency
-    GIT_REPOSITORY https://github.com/isbodand/GetDependency.git
-    GIT_TAG v1.1.0 # v1.0.x is known to break
-)
-FetchContent_MakeAvailable(GetDependency)
 
 ## Build dependencies
 # {fmt}
@@ -131,7 +124,7 @@ if (${PROJECT_NAME}_BUILD_TESTS)
 endif ()
 
 ```
-Then include it in your main `CMakeLists.txt`.
+Then include it in your main `CMakeLists.txt`. Make sure GetDependency is included first.
 
 ## The GetDependency command
 
