@@ -16,12 +16,9 @@ cmake_minimum_required(VERSION 3.11)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
 project(Get_Dependency
-    VERSION 1.0.2
+    VERSION 1.1.0
     DESCRIPTION "CMake library to install dependencies or locate them from the system"
     LANGUAGES NONE
 )
 
-include(Utils)
-include(GetGit)
-include(GetSVN)
 include(GetDependency)

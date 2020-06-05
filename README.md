@@ -108,7 +108,7 @@ include(FetchContent)
 FetchContent_Declare(
     GetDependency
     GIT_REPOSITORY https://github.com/isbodand/GetDependency.git
-    GIT_TAG v1.0.2
+    GIT_TAG v1.1.0 # v1.0.x is known to break
 )
 FetchContent_MakeAvailable(GetDependency)
 
