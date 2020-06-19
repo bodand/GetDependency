@@ -115,10 +115,10 @@ function(GetDependency)
     endif ()
 
     ## Remote only
-    if (DEFINED GET_DEP_REMOTE_ONLY)
+    if (GET_DEP_REMOTE_ONLY)
         set(RemoteOnly 1)
     else ()
-        set(RemoteOnly 2)
+        set(RemoteOnly 0)
     endif ()
 
     ## Library
