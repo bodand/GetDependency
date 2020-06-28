@@ -97,7 +97,7 @@ Installation can be done any way you wish, the only requirement is that the repo
 `add_subdirectory`'d into the project.
 You can just copy the whole thing and add it to your repo if you wish, or use a Git submodule
 to get it.  
-If you ask me, I use it with a submodule:  
+If you ask me, I use CMake do download the file for me:  
 
 ## Usage
 Have a `dependencies.cmake` file which is laid out like so, with example dependencies:

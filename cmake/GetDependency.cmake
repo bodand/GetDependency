@@ -202,7 +202,7 @@ function(GetDependency)
 
     if ("${${Library}_FOUND}")
         message(STATUS "Loaded dependency from system: '${Library}'")
-        set("${Library}_LINK_AS" ${Library})
+        set("${Library}_LINK_AS" ${Library} PARENT_SCOPE)
         return()
     endif ()
 
@@ -217,7 +217,7 @@ function(GetDependency)
         if ("${${FallbackLibrary}_FOUND}")
             message(STATUS "Loaded fallback dependency from system: '${FallbackLibrary}' "
                     "for dependency: '${Library}'")
-            set("${Library}_LINK_AS" ${FallbackLibrary})
+            set("${Library}_LINK_AS" ${FallbackLibrary} PARENT_SCOPE)
             return()
         endif ()
     endif ()
