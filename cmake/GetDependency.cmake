@@ -194,32 +194,36 @@ function(GetDependency)
     ## ARGUMENT HANDLING END ###################################################
 
     ## Main library
-    if (Components_LEN EQUAL 0)
-        find_package("${Library}" QUIET)
-    else ()
-        find_package("${Library}" COMPONENTS ${Components} QUIET)
-    endif ()
-
-    if ("${${Library}_FOUND}")
-        message(STATUS "Loaded dependency from system: '${Library}'")
-        set("${Library}_LINK_AS" ${Library} PARENT_SCOPE)
-        return()
-    endif ()
-
-    ## Fallback library
-    if (HasFallback)
-        if (FallbackComponents_LEN EQUAL 0)
-            find_package("${FallbackLibrary}" QUIET)
+    if (NOT RemoteOnly)
+        if (Components_LEN EQUAL 0)
+            find_package("${Library}" QUIET)
         else ()
-            find_package("${FallbackLibrary}" COMPONENTS ${FallbackComponents} QUIET)
+            find_package("${Library}" COMPONENTS ${Components} QUIET)
         endif ()
 
-        if ("${${FallbackLibrary}_FOUND}")
-            message(STATUS "Loaded fallback dependency from system: '${FallbackLibrary}' "
-                    "for dependency: '${Library}'")
-            set("${Library}_LINK_AS" ${FallbackLibrary} PARENT_SCOPE)
+        if ("${${Library}_FOUND}")
+            message(STATUS "Loaded dependency from system: '${Library}'")
+            set("${Library}_LINK_AS" ${Library} PARENT_SCOPE)
             return()
         endif ()
+
+        ## Fallback library
+        if (HasFallback)
+            if (FallbackComponents_LEN EQUAL 0)
+                find_package("${FallbackLibrary}" QUIET)
+            else ()
+                find_package("${FallbackLibrary}" COMPONENTS ${FallbackComponents} QUIET)
+            endif ()
+
+            if ("${${FallbackLibrary}_FOUND}")
+                message(STATUS "Loaded fallback dependency from system: '${FallbackLibrary}' "
+                        "for dependency: '${Library}'")
+                set("${Library}_LINK_AS" ${FallbackLibrary} PARENT_SCOPE)
+                return()
+            endif ()
+        endif ()
+    else ()
+        message(STATUS "REMOTE_ONLY was specified for '${Library}'. Following orders.")
     endif ()
 
     ## Install
